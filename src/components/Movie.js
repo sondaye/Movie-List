@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
-import { jsx, css} from '@emotion/react';
+import { jsx, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useState } from "react";
 
@@ -17,6 +17,7 @@ const CardStyle = css `
   }
   transition: 0.5s;
 `;
+
 
 const CardStyles = styled.div(props => {
   return {
@@ -44,17 +45,17 @@ function Movie({id, coverImg, title, genres}) {
   };
 
     return (
-    <div css={CardStyle}>
-      <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
-     <h2>
-        <Link to={`/movie/${id}`}>{title}</Link>
-      </h2>
-      <ul css={ListStyle}>
-        {genres.map((g) => (
-          <li key={g}>{g}</li>
-        ))}
-      </ul>
-  </div>
+      <div css={CardStyle}>
+        <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
+      <h2>
+          <Link to={`/movie/${id}`}>{title}</Link>
+        </h2>
+        <ul css={ListStyle}>
+          {genres.map((g) => (
+            <li key={g}>{g}</li>
+          ))}
+        </ul>
+      </div>
     )
 }
 

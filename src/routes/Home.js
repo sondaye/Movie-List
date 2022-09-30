@@ -5,9 +5,17 @@ import { jsx, css} from '@emotion/react';
 
 const DivStyle = css`
   padding: 0;
+  margin: 0;
   text-align: center;
   margin-top: 200px;
   margin-bottom:200px;
+`;
+
+const CardStyle = css`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 
 
@@ -34,7 +42,7 @@ function Home(){
       {loading ? (
         <h1>Loading...</h1> 
       ) : ( 
-      <div>
+      <div css={CardStyle}>
         {movies.map((movie) => (
           <Movie
             key={movie.id}
