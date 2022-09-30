@@ -35,7 +35,7 @@ const ImgStyle = css`
   border: 1px solid red;
 `;
 
-function Movie({id, coverImg, title, summary, genres}) {
+function Movie({id, coverImg, title, genres}) {
   const[clicked, setClicked] = useState(false);
   const handleClick = (event) => {
     event.preventDefault();
@@ -44,17 +44,16 @@ function Movie({id, coverImg, title, summary, genres}) {
   };
 
     return (
-    <div css={CardStyle} onClick={handleClick}>
-      <img src={coverImg} alt={title} css={ImgStyle}/>
-      {/* <h2>
+    <div css={CardStyle}>
+      <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
+     <h2>
         <Link to={`/movie/${id}`}>{title}</Link>
       </h2>
-      <p>{summary}</p>
       <ul css={ListStyle}>
         {genres.map((g) => (
           <li key={g}>{g}</li>
         ))}
-      </ul> */}
+      </ul>
   </div>
     )
 }
@@ -63,8 +62,7 @@ Movie.propTypes = {
     id: PropTypes.number.isRequired,
     coverImg: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    summary: PropTypes.string.isRequired,
-    genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+    genres: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 export default Movie;

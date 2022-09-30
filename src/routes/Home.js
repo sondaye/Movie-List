@@ -12,15 +12,17 @@ const DivStyle = css`
 
 
 function Home(){
+  const KEY = "ae316f6f3f4ed0188bb67dbf3c41a5f5"
+  const URL = "https://api.themoviedb.org/3/movie/"
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const getMovies = async() => {
     const json = await (
         await fetch(
-      `https://yts.mx/api/v2/list_movies.json?minimum_rating=9&sort_by=year`
+      `${URL}popular?api_key=${KEY}`
       )
     ).json();
-    setMovies(json.data.movies);
+    setMovies(json.results);
     setLoading(false);
   };
   useEffect(() => {
@@ -37,10 +39,9 @@ function Home(){
           <Movie
             key={movie.id}
             id={movie.id}
-            coverImg={movie.large_cover_image}
+            coverImg={movie.poster_path}
             title={movie.title} 
-            //summary={movie.summary} 
-            genres={movie.genres} 
+            genres={movie.genre_ids} 
           />
         ))}
     </div>
@@ -50,3 +51,5 @@ function Home(){
 }
 
 export default Home;
+export const KEY = "ae316f6f3f4ed0188bb67dbf3c41a5f5"
+export const URL = "https://api.themoviedb.org/3/movie/"
