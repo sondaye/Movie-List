@@ -18,13 +18,6 @@ const CardStyle = css `
   transition: 0.5s;
 `;
 
-
-const CardStyles = styled.div(props => {
-  return {
-
-  }
-})
-
 const ListStyle = css`
   list-style:none;
   color: white;
@@ -36,6 +29,19 @@ const ImgStyle = css`
   border: 1px solid red;
 `;
 
+const CardInner = css`
+  width: 100%;
+  height: 100%;
+  transition: transfrom 1s;
+  transfrom-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+`;
+
+const CardInnerFlipped = css`transform: rotateY(180deg)`;
+
+
+
 function Movie({id, coverImg, title, genres}) {
   const[clicked, setClicked] = useState(false);
   const handleClick = (event) => {
@@ -46,15 +52,21 @@ function Movie({id, coverImg, title, genres}) {
 
     return (
       <div css={CardStyle}>
-        <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
+        <div id="card_inner" css={CardInner}>
+          <div>
+            <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
+          </div>
+          <div>
+            <ul css={ListStyle}>
+              {genres.map((g) => (
+                <li key={g}>{g}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       <h2>
-          <Link to={`/movie/${id}`}>{title}</Link>
+        <Link to={`/movie/${id}`}>{title}</Link>
         </h2>
-        <ul css={ListStyle}>
-          {genres.map((g) => (
-            <li key={g}>{g}</li>
-          ))}
-        </ul>
       </div>
     )
 }
