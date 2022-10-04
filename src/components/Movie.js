@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react';
-import styled from '@emotion/styled';
 import { useState } from "react";
 
 const CardStyle = css `
@@ -12,10 +11,57 @@ const CardStyle = css `
   width: 100%;
   max-width: 300px;
   text-align: center;
+  perspective: 1000px;
   &:hover{
     transform: scale(0.9);
   }
   transition: 0.5s;
+  perspective: 1000px;
+`;
+
+const CardInner = props => css`
+  width: 300px;
+  height: 400px;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  transform: ${props.flipped ? 'rotateY(180deg)' : 'none'};
+`;
+
+const CardFace = css`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    overflow: hidden;
+`;
+
+const CardFront = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const CardBack = css`
+    background: red;
+    transform: rotateY(180deg);
+`;
+
+const CardHeader = css`
+    position: reative;
+    padding: 30px 30px 40px;
+    &:after{
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        z-index: -1;
+    }
 `;
 
 const ListStyle = css`
@@ -26,47 +72,41 @@ const ListStyle = css`
 
 const ImgStyle = css`
   width: 280px;
-  border: 1px solid red;
 `;
 
-const CardInner = css`
-  width: 100%;
-  height: 100%;
-  transition: transfrom 1s;
-  transfrom-style: preserve-3d;
-  cursor: pointer;
-  position: relative;
-`;
-
-const CardInnerFlipped = css`transform: rotateY(180deg)`;
 
 
 
 function Movie({id, coverImg, title, genres}) {
-  const[clicked, setClicked] = useState(false);
-  const handleClick = (event) => {
-    event.preventDefault();
-    setClicked(current => !current);
-
-  };
+  const [flipped, setFlipped] = useState(false);
+  const handleFlip = () => {
+    setFlipped((current) => !current);
+  }
 
     return (
-      <div css={CardStyle}>
-        <div id="card_inner" css={CardInner}>
-          <div>
-            <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={ImgStyle}/>
+      <div className="card" css={CardStyle}>
+        <div className="card_inner" css={CardInner({flipped})} onClick={handleFlip}>
+          <div className="card_front">
+            <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={[ImgStyle, CardFace, CardFront]}/>
           </div>
-          <div>
-            <ul css={ListStyle}>
-              {genres.map((g) => (
-                <li key={g}>{g}</li>
-              ))}
-            </ul>
+          <div className="card_back" css={[CardFace, CardBack]}>
+            <div className="card-content">
+              <div className="card-header" css={CardHeader}>
+                <h2>
+                  <Link to={`/movie/${id}`}>{title}</Link>
+                </h2>
+              </div>
+              <div className="card-body">
+                <ul css={ListStyle}>
+                  {genres.map((g) => (
+                    <li key={g}>{g}</li>
+                  ))}
+                </ul>
+                <Link to={`/movie/${id}`}><button>상세보기</button></Link>
+              </div>
+            </div>
           </div>
         </div>
-      <h2>
-        <Link to={`/movie/${id}`}>{title}</Link>
-        </h2>
       </div>
     )
 }
