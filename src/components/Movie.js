@@ -51,7 +51,6 @@ const CardBack = css`
 
 const CardHeader = css`
     position: reative;
-    padding: 30px 30px 40px;
     &:after{
         content: '';
         display: block;
@@ -77,7 +76,7 @@ const ImgStyle = css`
 
 
 
-function Movie({id, coverImg, title, genres}) {
+function Movie({id, coverImg, title, genres, overview, release}) {
   const [flipped, setFlipped] = useState(false);
   const handleFlip = () => {
     setFlipped((current) => !current);
@@ -97,11 +96,13 @@ function Movie({id, coverImg, title, genres}) {
                 </h2>
               </div>
               <div className="card-body">
-                <ul css={ListStyle}>
+                <h3>{release}</h3>
+                <p>{overview}</p>
+                {/*<ul css={ListStyle}>
                   {genres.map((g) => (
                     <li key={g}>{g}</li>
                   ))}
-                </ul>
+                  </ul>*/}
                 <Link to={`/movie/${id}`}><button>상세보기</button></Link>
               </div>
             </div>

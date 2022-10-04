@@ -51,6 +51,8 @@ function Home(){
             coverImg={movie.poster_path}
             title={movie.title} 
             genres={movie.genre_ids} 
+            overview={movie.overview}
+            release={movie.release_date}
           />
         ))}
     </div>
