@@ -91,9 +91,7 @@ function Movie({id, coverImg, title, genres, overview, release}) {
           <div className="card_back" css={[CardFace, CardBack]}>
             <div className="card-content">
               <div className="card-header" css={CardHeader}>
-                <h2>
-                  <Link to={`/movie/${id}`}>{title}</Link>
-                </h2>
+                <h2>{title}</h2>
               </div>
               <div className="card-body">
                 <h3>{release}</h3>
@@ -103,7 +101,7 @@ function Movie({id, coverImg, title, genres, overview, release}) {
                     <li key={g}>{g}</li>
                   ))}
                   </ul>*/}
-                <Link to={`/movie/${id}`}><button>상세보기</button></Link>
+                <Link to={`/movie/${id}`}><button css={css`padding:20px;`}>상세보기</button></Link>
               </div>
             </div>
           </div>

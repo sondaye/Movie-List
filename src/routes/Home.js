@@ -21,7 +21,7 @@ const CardStyle = css`
 
 
 function Home(){
-  const KEY = "ae316f6f3f4ed0188bb67dbf3c41a5f5"
+  const KEY = process.env.REACT_APP_API_KEY
   const URL = "https://api.themoviedb.org/3/movie/"
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
