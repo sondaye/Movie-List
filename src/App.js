@@ -2,7 +2,10 @@ import Movie from "./components/Movie";
 import {useState, useEffect} from "react";
 /** @jsxImportSource @emotion/react */
 import { Global, jsx, css } from '@emotion/react';
-import Home from "./routes/Home";
+import Popular from "./routes/Popular";
+import TopRated from "./routes/Top_rated";
+import NowPlying from "./routes/Now_playing";
+import Upcoming from "./routes/Upcoming";
 import Detail from "./routes/Detail";
 import {
   BrowserRouter as Router,
@@ -26,8 +29,17 @@ function App() {
       <Route path="/movie/:id">
         <Detail />
       </Route>
-      <Route path="/">
-        <Home />
+      <Route path="/popular">
+        <Popular />
+      </Route>
+      <Route path="/top_rated">
+        <TopRated />
+      </Route>
+      <Route path="/now_playing">
+        <NowPlying />
+      </Route>
+      <Route path="/upcoming">
+        <Upcoming />
       </Route>
     </Switch>
   </Router>;

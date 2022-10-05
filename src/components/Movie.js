@@ -22,6 +22,7 @@ const CardStyle = css `
 const CardInner = props => css`
   width: 300px;
   height: 400px;
+  border: 1px solid red;
   transition: transform 1s;
   transform-style: preserve-3d;
   cursor: pointer;
@@ -95,12 +96,6 @@ function Movie({id, coverImg, title, genres, overview, release}) {
               </div>
               <div className="card-body">
                 <h3>{release}</h3>
-                <p>{overview}</p>
-                {/*<ul css={ListStyle}>
-                  {genres.map((g) => (
-                    <li key={g}>{g}</li>
-                  ))}
-                  </ul>*/}
                 <Link to={`/movie/${id}`}><button css={css`padding:20px;`}>상세보기</button></Link>
               </div>
             </div>
