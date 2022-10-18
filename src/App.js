@@ -38,7 +38,7 @@ function App() {
       <Route path="/now_playing">
         <NowPlying />
       </Route>
-      <Route path="/upcoming">
+      <Route path="/">
         <Upcoming />
       </Route>
     </Switch>

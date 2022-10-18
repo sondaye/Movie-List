@@ -27,7 +27,14 @@ function Genre({genreId}) {
         {id: 37, name: 'Western'}
     ]
 
-    const result = genres.filter(data => data.id == `${genreId}`).map(data => {return <span>{data.name} </span>});
+    const result = genres.filter(data => data.id == `${genreId}`).map(
+        data => {
+            return (
+            <div>
+                <span css={css`color:white;`}>{data.name} </span>
+            </div>)
+            }
+        );
     return result;
 }
 

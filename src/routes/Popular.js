@@ -46,10 +46,8 @@ const StyledNavLink = styled(NavLink)`
 function Popular(){
   const KEY = process.env.REACT_APP_API_KEY
   const URL = "https://api.themoviedb.org/3/movie/"
-  const gURL = "https://api.themoviedb.org/3/genre/movie/"
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [genres, setGenres] = useState([]);
   const getMovies = async() => {
     const json = await (
         await fetch(
@@ -59,19 +57,9 @@ function Popular(){
     setMovies(json.results);
     setLoading(false);
   };
-  const getGenres = async() => {
-    const json = await (
-        await fetch(
-      `${gURL}list?api_key=${KEY}`
-      )
-    ).json();
-    setGenres(json.genres);
-  };
   useEffect(()=>{
     getMovies();
-    getGenres();
   }, []);
-  console.log(genres);
   
   return (
     <div css={DivStyle}>
