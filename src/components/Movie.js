@@ -99,7 +99,7 @@ function Movie({id, coverImg, title, genres, overview, release}) {
       <div className="card" css={CardStyle}>
         <div className="card_inner" css={CardInner({flipped})} onClick={handleFlip}>
           <div className="card_front">
-            <img src={"https://image.tmdb.org/t/p/w200" + coverImg} alt={title} css={[ImgStyle, CardFace, CardFront]}/>
+            <img src={"https://image.tmdb.org/t/p/w780" + coverImg} alt={title} css={[ImgStyle, CardFace, CardFront]}/>
           </div>
           <div className="card_back" css={[CardFace, CardBack]}>
             <div className="card-content">
