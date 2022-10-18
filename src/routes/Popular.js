@@ -57,6 +57,7 @@ function Popular(){
     setMovies(json.results);
     setLoading(false);
   };
+  console.log(movies);
   useEffect(()=>{
     getMovies();
   }, []);

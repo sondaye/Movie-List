@@ -45,7 +45,7 @@ function Detail(){
             <h1>{movie.original_title}</h1>
             <h1>{movie.title}</h1>
             <h1>{movie.tagline}</h1>
-            <img src={"https://image.tmdb.org/t/p/w400"+movie.poster_path} alt={movie.title} />
+            <img src={"https://image.tmdb.org/t/p/original"+movie.backdrop_path} alt={movie.title} />
             <h3>{movie.release_date}</h3>
             <h3>{movie.runtime}분</h3>
             <h3>평점: {movie.vote_average}</h3>
