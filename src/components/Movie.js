@@ -2,7 +2,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 /** @jsxImportSource @emotion/react */
 import { jsx, css } from '@emotion/react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Genre from "./Genre";
 
 const CardStyle = css `
   display: inline-block;
@@ -74,6 +75,16 @@ const ImgStyle = css`
   width: 280px;
 `;
 
+const Button = css`
+  padding: 10px;
+  margin-top: 20px;
+  width: 90%;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+`;
+
 
 
 
@@ -82,6 +93,7 @@ function Movie({id, coverImg, title, genres, overview, release}) {
   const handleFlip = () => {
     setFlipped((current) => !current);
   }
+
 
     return (
       <div className="card" css={CardStyle}>
@@ -95,8 +107,18 @@ function Movie({id, coverImg, title, genres, overview, release}) {
                 <h2>{title}</h2>
               </div>
               <div className="card-body">
-                <h3>{release}</h3>
-                <Link to={`/movie/${id}`}><button css={css`padding:20px;`}>상세보기</button></Link>
+                <div className="card-info">
+                  <h3>{release}</h3>
+                  {genres.map((g) => (
+                    <Genre
+                      key={g}
+                      genreId={g}
+                    />
+                  ))}
+                </div>
+                <div className="card-button">
+                  <Link to={`/movie/${id}`}><button css={Button}>상 세 보 기</button></Link>
+                </div>
               </div>
             </div>
           </div>

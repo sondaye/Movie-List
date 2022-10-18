@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import {useEffect, useState} from "react";
 import Movie from "../components/Movie";
+import Genre from "../components/Genre";
 /** @jsxImportSource @emotion/react */
 import { jsx, css} from '@emotion/react';
 import styled from '@emotion/styled';
@@ -45,8 +46,10 @@ const StyledNavLink = styled(NavLink)`
 function Popular(){
   const KEY = process.env.REACT_APP_API_KEY
   const URL = "https://api.themoviedb.org/3/movie/"
+  const gURL = "https://api.themoviedb.org/3/genre/movie/"
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
+  const [genres, setGenres] = useState([]);
   const getMovies = async() => {
     const json = await (
         await fetch(
@@ -56,10 +59,20 @@ function Popular(){
     setMovies(json.results);
     setLoading(false);
   };
-  useEffect(() => {
+  const getGenres = async() => {
+    const json = await (
+        await fetch(
+      `${gURL}list?api_key=${KEY}`
+      )
+    ).json();
+    setGenres(json.genres);
+  };
+  useEffect(()=>{
     getMovies();
+    getGenres();
   }, []);
-  console.log(movies);
+  console.log(genres);
+  
   return (
     <div css={DivStyle}>
       {loading ? (
@@ -74,15 +87,15 @@ function Popular(){
         </ul>
         <div css={CardStyle}>
           {movies.map((movie) => (
-            <Movie
-              key={movie.id}
-              id={movie.id}
-              coverImg={movie.poster_path}
-              title={movie.title} 
-              genres={movie.genre_ids} 
-              overview={movie.overview}
-              release={movie.release_date}
-            />
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                coverImg={movie.poster_path}
+                title={movie.title} 
+                genres={movie.genre_ids}
+                overview={movie.overview}
+                release={movie.release_date}
+              />
           ))}
         </div>
       </div>
